@@ -10,9 +10,9 @@ Goal: Make a functional Gin API with Auth0, Docker, and Postgres.
 
 The main executable lives in `/cmd/gin_auth0_example/main.go`.
 
-Code that code be reused should be in defined packages in `/pkg`.
+Code that could be used by 3rd party apps should be in defined packages in `/pkg/<pkg_name>`.
 
-Any code that won't be shared can live in `/internal`.
+Any code that won't be shared can live in `/internal/<name>/...`.
 
 `/configs` should be self-explaining.
 
