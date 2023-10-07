@@ -12,7 +12,6 @@ import (
 )
 
 var db *gorm.DB
-var err error
 
 type Article struct {
 	ID          uint   `json:"id" gorm:"primary_key"`
