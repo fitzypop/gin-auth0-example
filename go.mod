@@ -1,4 +1,4 @@
-module github.com/fitzypop/gin_auth0_example
+module github.com/fitzypop/gin-auth0-example
 
 go 1.21.2
 
