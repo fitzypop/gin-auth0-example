@@ -1,0 +1,13 @@
+# Git
+**/.git
+**/.gitignore
+
+# Folders
+build
+test
+
+# Files
+justfile
+LICENSE
+**/*.md
+**/.env.*

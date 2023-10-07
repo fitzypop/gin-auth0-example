@@ -1,15 +1,15 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"github.com/fitzypop/gin-auth0-example/api"
+	"github.com/fitzypop/gin-auth0-example/db"
 )
 
+func init() {
+	db.NewPostgresClient()
+}
+
 func main() {
-	router := gin.Default()
-	router.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"messge": "Hello Gin. Cheers!"})
-	})
-	router.Run()
+	r := api.SetupRouter()
+	r.Run()
 }
