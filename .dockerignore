@@ -5,9 +5,12 @@
 # Folders
 build
 test
+pgdata
 
 # Files
 justfile
 LICENSE
 **/*.md
 **/.env.*
+compose.yml
+Dockerfile

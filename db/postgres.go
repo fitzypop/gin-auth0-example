@@ -20,17 +20,27 @@ type Article struct {
 	Rate        int    `json:"rate"`
 }
 
+func getEnv(key string, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return fallback
+}
+
+const DEFAULT_ENV string = "postgres"
+
 func NewPostgresClient() {
-	err := godotenv.Load(".env")
+	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file", err)
 	}
+
 	var (
-		host     = os.Getenv("DB_HOST")
-		port     = os.Getenv("DB_PORT")
-		user     = os.Getenv("DB_USER")
-		dbname   = os.Getenv("DB_NAME")
-		password = os.Getenv("DB_PASSWORD")
+		host     = getEnv("DB_HOST", DEFAULT_ENV)
+		port     = getEnv("DB_PORT", "5432")
+		user     = getEnv("DB_USER", DEFAULT_ENV)
+		dbname   = getEnv("DB_NAME", DEFAULT_ENV)
+		password = getEnv("DB_PASSWORD", "pass1234")
 	)
 
 	conn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",
