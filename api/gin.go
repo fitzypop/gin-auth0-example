@@ -7,11 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func home(c *gin.Context) {
+func Home(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"messge": "Hello Gin. Cheers!"})
 }
 
-func getArticle(c *gin.Context) {
+func GetArticle(c *gin.Context) {
 	id := c.Param("id")
 	article, err := db.ReadArticle(id)
 	if err != nil {
@@ -21,7 +21,7 @@ func getArticle(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"article": article})
 }
 
-func getArticles(c *gin.Context) {
+func GetArticles(c *gin.Context) {
 	articles, err := db.ReadArticles()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -34,7 +34,7 @@ func getArticles(c *gin.Context) {
 	})
 }
 
-func postArticle(c *gin.Context) {
+func PostArticle(c *gin.Context) {
 	var article db.Article
 	if err := c.ShouldBindJSON(&article); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
@@ -48,7 +48,7 @@ func postArticle(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"article": res})
 }
 
-func putArticle(c *gin.Context) {
+func PutArticle(c *gin.Context) {
 	var article db.Article
 	if err := c.ShouldBindJSON(&article); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -69,7 +69,7 @@ func putArticle(c *gin.Context) {
 	})
 }
 
-func deleteArticle(c *gin.Context) {
+func DeleteArticle(c *gin.Context) {
 	id := c.Param("id")
 	_, err := db.DeleteArticle(id)
 	if err != nil {
@@ -81,15 +81,4 @@ func deleteArticle(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "article deleted successfully",
 	})
-}
-
-func SetupRouter() *gin.Engine {
-	r := gin.Default()
-	r.GET("/", home)
-	r.GET("/api/v1/articles/:id", getArticle)
-	r.GET("/api/v1/articles", getArticles)
-	r.POST("/api/v1/articles", postArticle)
-	r.PUT("/api/v1/articles/:id", putArticle)
-	r.DELETE("/api/v1/articles/:id", deleteArticle)
-	return r
 }

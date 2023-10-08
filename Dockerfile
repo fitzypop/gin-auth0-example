@@ -16,7 +16,6 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -v -a -installsuffix cgo -o g
 FROM scratch
 
 COPY --from=builder /build/goapi /bin/goapi
-COPY --from=builder /build/.env .
 
 CMD ["chmod", "+x", "/bin/goapi"]
 
