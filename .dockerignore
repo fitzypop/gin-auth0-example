@@ -11,6 +11,5 @@ pgdata
 justfile
 LICENSE
 **/*.md
-**/.env.*
 compose.yml
 Dockerfile
